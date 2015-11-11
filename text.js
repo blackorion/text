@@ -176,6 +176,13 @@ define(['module'], function (module) {
                 useXhr = (masterConfig.useXhr) ||
                          text.useXhr;
 
+            // Return text from dom element if found by id
+            var storedInTemplates = document.getElementById(name.replace('tmpls', 'templates'));
+            if (storedInTemplates !== null) {
+                text.finishLoad(name, parsed.strip, storedInTemplates.innerHTML, onLoad);
+                return;
+            }
+
             // Do not load if it is an empty: url
             if (url.indexOf('empty:') === 0) {
                 onLoad();
